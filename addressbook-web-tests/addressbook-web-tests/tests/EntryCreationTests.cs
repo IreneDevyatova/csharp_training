@@ -12,22 +12,29 @@ namespace WebAddressbookTests
     [TestFixture]
     public class EntryCreationTests : TestBase
     {
-        
-
+      
         [Test]
         public void EntryCreationTest()
         {
-            app.Navigator.GoToCreateEntryPage();
+            
             EntryData entry = new EntryData("irene", "devyatova");
-            app.Entry
+            app.Entries
                 .FillInEntryForm(entry)
                 .SubmitEntryCreation();
-            // ERROR: Caught exception [Error: Dom locators are not implemented yet!]
-            app.Entry.ReturnToHomePage();
+            
+            app.Entries.Create(entry);
         }
 
-     
-        
+        [Test]
+        public void EmptyEntryCreationTest()
+        {
+            EntryData entry = new EntryData("", "");
+            app.Entries
+                .FillInEntryForm(entry)
+                .SubmitEntryCreation();
+
+            app.Entries.Create(entry);
+        }
     }
 }
 

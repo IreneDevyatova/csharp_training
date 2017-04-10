@@ -74,7 +74,7 @@ namespace WebAddressbookTests
             }
         }
 
-        public EntryHelper Entry
+        public EntryHelper Entries
         {
             get
             {
