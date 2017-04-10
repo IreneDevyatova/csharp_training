@@ -11,27 +11,32 @@ namespace WebAddressbookTests
 {
     public class EntryHelper : HelperBase
     {
-        public EntryHelper(IWebDriver driver) 
-            : base(driver)
+        public EntryHelper(ApplicationManager manager) 
+            : base(manager)
         {
         }
 
        
 
-        public void FillInEntryForm(EntryData entry)
+        public EntryHelper FillInEntryForm(EntryData entry)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(entry.Firstname);
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(entry.Lastname);
-
+            return this;
         }
 
-        public void SubmitEntryCreation()
+        public EntryHelper SubmitEntryCreation()
         {
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+            return this;
         }
 
-    
+        public void ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
+
     }
 }

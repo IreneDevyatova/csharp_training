@@ -21,11 +21,22 @@ namespace WebAddressbookTests
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            entryHelper = new EntryHelper(driver);
-        } 
+            driver = new FirefoxDriver(new FirefoxBinary ("C:\\Program Files\\Mozilla Firefox\\firefox.exe"), new FirefoxProfile());
+            baseURL = "http://localhost";
+
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            entryHelper = new EntryHelper(this);
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+        }
 
         public void Stop()
         {
@@ -70,5 +81,7 @@ namespace WebAddressbookTests
                 return entryHelper;
             }
         }
+
+       
     }
 }

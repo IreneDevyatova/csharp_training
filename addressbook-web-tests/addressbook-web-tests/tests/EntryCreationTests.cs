@@ -17,14 +17,13 @@ namespace WebAddressbookTests
         [Test]
         public void EntryCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
             app.Navigator.GoToCreateEntryPage();
             EntryData entry = new EntryData("irene", "devyatova");
-            app.Entry.FillInEntryForm(entry);
-            app.Entry.SubmitEntryCreation();
+            app.Entry
+                .FillInEntryForm(entry)
+                .SubmitEntryCreation();
             // ERROR: Caught exception [Error: Dom locators are not implemented yet!]
-            app.Navigator.ReturnToHomePage();
+            app.Entry.ReturnToHomePage();
         }
 
      
