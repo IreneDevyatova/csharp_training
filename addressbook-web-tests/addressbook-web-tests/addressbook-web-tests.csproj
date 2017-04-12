@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="appmanager\EntryHelper.cs" />
-    <Compile Include="EntryRemovalTests.cs" />
+    <Compile Include="tests\EntryRemovalTests.cs" />
     <Compile Include="tests\EntryModificationTests.cs" />
     <Compile Include="tests\GroupModificationTests.cs" />
     <Compile Include="model\AccountData.cs" />

@@ -14,7 +14,7 @@ namespace WebAddressbookTests
         public void EntryRemovalTestFromList()
         {
 
-            app.Entries.RemoveFromList(3);
+            app.Entries.RemoveFromList(4);
 
         }
     }

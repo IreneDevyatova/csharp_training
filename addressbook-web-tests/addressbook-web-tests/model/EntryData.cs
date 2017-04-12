@@ -20,14 +20,15 @@ namespace WebAddressbookTests
         private string work = "";
         private string fax = "";
         private string email = "";
-        private string email1 = "";
         private string email2 = "";
         private string email3 = "";
         private string homepage = "";
         private string address2 = "";
         private string phone2 = "";
         private string notes = "";
-
+        private string bDay = "";
+        private string bMonth = "";
+        private string bYear = "";
 
         public EntryData(string firstname, string lastname)
         {
@@ -179,18 +180,6 @@ namespace WebAddressbookTests
             }
         }
 
-        public string Email1
-        {
-            get
-            {
-                return email1;
-            }
-            set
-            {
-                email1 = value;
-            }
-        }
-
         public string Email2
         {
             get
@@ -260,6 +249,42 @@ namespace WebAddressbookTests
             set
             {
                 notes = value;
+            }
+        }
+
+        public string BDay
+        {
+            get
+            {
+                return bDay;
+            }
+            set
+            {
+                bDay = value;
+            }
+        }
+
+        public string BMonth
+        {
+            get
+            {
+                return bMonth;
+            }
+            set
+            {
+                bMonth = value;
+            }
+        }
+
+        public string BYear
+        {
+            get
+            {
+                return bYear;
+            }
+            set
+            {
+                bYear = value;
             }
         }
     }
