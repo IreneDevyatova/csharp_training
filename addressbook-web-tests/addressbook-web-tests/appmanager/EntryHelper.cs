@@ -102,7 +102,7 @@ namespace WebAddressbookTests
 
         public EntryHelper InitEntryModificationFromViewPage()
         {
-            driver.FindElement(By.XPath("(//img[@alt='Details'])[+ index +]")).Click();
+            driver.FindElement(By.CssSelector("img[alt=\"Details\"]")).Click();
             driver.FindElement(By.Name("modifiy")).Click();
             return this;
         }

@@ -18,10 +18,6 @@ namespace WebAddressbookTests
         {
             
             EntryData entry = new EntryData("irene", "devyatova");
-            app.Entries
-                .FillInEntryForm(entry)
-                .SubmitEntryCreation();
-            
             app.Entries.Create(entry);
         }
 
@@ -29,10 +25,6 @@ namespace WebAddressbookTests
         public void EmptyEntryCreationTest()
         {
             EntryData entry = new EntryData("", "");
-            app.Entries
-                .FillInEntryForm(entry)
-                .SubmitEntryCreation();
-
             app.Entries.Create(entry);
         }
     }
