@@ -37,6 +37,11 @@ namespace WebAddressbookTests
             entry.BDay = "";
             entry.BMonth = "-";
             entry.BYear = "";
+            entry.ADay = "";
+            entry.AMonth = "-";
+            entry.AYear = "";
+          //  entry.EntryGroup = "";
+
             app.Entries.Create(entry);
         }
 
@@ -63,6 +68,11 @@ namespace WebAddressbookTests
             entry.BDay = "";
             entry.BMonth = "-";
             entry.BYear = "";
+            entry.ADay = "";
+            entry.AMonth = "-";
+            entry.AYear = "";
+           // entry.EntryGroup = "";
+
             app.Entries.Create(entry);
         }
 
@@ -89,6 +99,10 @@ namespace WebAddressbookTests
             entry.BDay = "12";
             entry.BMonth = "July";
             entry.BYear = "1987";
+            entry.ADay = "6";
+            entry.AMonth = "October";
+            entry.AYear = "2011";
+          //  entry.EntryGroup = "q";
 
             app.Entries.Create(entry);
         }

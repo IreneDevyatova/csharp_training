@@ -11,7 +11,7 @@ namespace WebAddressbookTests
         private string name;
         private string header = "";
         private string footer = "";
-
+        private string group_parent_id = "";
 
         public GroupData(string name)
         {
@@ -57,5 +57,16 @@ namespace WebAddressbookTests
             }
         }
 
+        public string GroupParentId
+        {
+            get
+            {
+                return group_parent_id;
+            }
+            set
+            {
+                group_parent_id = value;
+            }
+        }
     }
 }

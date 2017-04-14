@@ -18,7 +18,7 @@ namespace WebAddressbookTests
             GroupData newGroupData = new GroupData("Modified Group");
             newGroupData.Header = "Modified Header";
             newGroupData.Footer = "Modified Footer";
-
+            newGroupData.GroupParentId = "Modified Group";
             app.Groups.Modify(1, newGroupData);
         }
     }

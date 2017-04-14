@@ -16,8 +16,6 @@ namespace WebAddressbookTests
         {
         }
 
-      
-
         public EntryHelper Create(EntryData entry)
         {
             manager.Navigator.GoToCreateEntryPage();
@@ -29,9 +27,9 @@ namespace WebAddressbookTests
 
         public EntryHelper ModifyByIcon(int v, EntryData newEntryData)
         {
-            SelectEntry(v);
             manager.Navigator.GoToHomePage();
-            InitEntryModificationByIcon();
+            SelectEntry(v);
+            InitEntryModificationByIcon(v);
             FillInEntryForm(newEntryData);
             SubmitEntryModification();
             ReturnToHomePage();
@@ -42,7 +40,8 @@ namespace WebAddressbookTests
         public EntryHelper ModifyFromViewPage(int v, EntryData newEntryData)
         {
             manager.Navigator.GoToHomePage();
-            InitEntryModificationFromViewPage();
+
+            InitEntryModificationFromViewPage(v);
             FillInEntryForm(newEntryData);
             SubmitEntryModification();
             ReturnToHomePage();
@@ -54,13 +53,28 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             SelectEntry(v);
-            RemoveEntry();
+            RemoveEntryFromList();
 
             return this;
         }
 
-      
+        public EntryHelper RemoveEntryFromEdit(int v)
+        {
+            manager.Navigator.GoToHomePage();
+            InitEntryModificationByIcon(v);
+            RemoveEntryFromEdit();
 
+            return this;
+        }
+
+        public EntryHelper RemoveAllEntries()
+        {
+            manager.Navigator.GoToHomePage();
+            SelectAll();
+            RemoveEntryFromList();
+            return this;
+        }
+     
         public EntryHelper FillInEntryForm(EntryData entry)
         {
             driver.FindElement(By.Name("firstname")).Clear();
@@ -103,6 +117,9 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(entry.BMonth);
             driver.FindElement(By.Name("byear")).Clear();
             driver.FindElement(By.Name("byear")).SendKeys(entry.BYear);
+            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(entry.ADay);
+            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(entry.AMonth);
+           // new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(entry.EntryGroup);
 
             return this;
         }
@@ -125,9 +142,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public EntryHelper InitEntryModificationByIcon()
+        public EntryHelper InitEntryModificationByIcon(int index)
         {
-            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" +index + "]")).Click();
             return this;
         }
 
@@ -137,17 +154,30 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public EntryHelper InitEntryModificationFromViewPage()
+        public EntryHelper InitEntryModificationFromViewPage(int index)
         {
-            driver.FindElement(By.CssSelector("img[alt=\"Details\"]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Details'])["+ index +"]")).Click();
             driver.FindElement(By.Name("modifiy")).Click();
             return this;
         }
 
-        public EntryHelper RemoveEntry()
+        public EntryHelper RemoveEntryFromList()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+          public EntryHelper RemoveEntryFromEdit()
+        {
+           
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        public EntryHelper SelectAll()
+        {
+            driver.FindElement(By.Id("MassCB")).Click();
             return this;
         }
     }

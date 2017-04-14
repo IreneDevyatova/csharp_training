@@ -12,7 +12,7 @@ namespace WebAddressbookTests
     class EntryModificationTests : TestBase
     {
         [Test]
-        public void EntryModificationTestByIcon()
+        public void EntryModificationByIconTest()
         {
             EntryData newEntryData = new EntryData("abyr", "abyr");
             newEntryData.Address = "asdasdaddress";
@@ -34,12 +34,16 @@ namespace WebAddressbookTests
             newEntryData.BDay = "18";
             newEntryData.BMonth = "January";
             newEntryData.BYear = "2000";
+            newEntryData.ADay = "13";
+            newEntryData.AMonth = "March";
+            newEntryData.AYear = "2011";
+            
 
-            app.Entries.ModifyByIcon(3, newEntryData);
+            app.Entries.ModifyByIcon(1, newEntryData);
         }
 
         [Test]
-        public void EntryModificationTestFromViewPage()
+        public void EntryModificationFromViewPageTest()
         {
             EntryData newEntryData = new EntryData("asd", "qwe");
             newEntryData.Address = "address";
@@ -61,8 +65,12 @@ namespace WebAddressbookTests
             newEntryData.BDay = "19";
             newEntryData.BMonth = "May";
             newEntryData.BYear = "1967";
+            newEntryData.ADay = "30";
+            newEntryData.AMonth = "November";
+            newEntryData.AYear = "1999";
+            
 
-            app.Entries.ModifyFromViewPage(2, newEntryData);
+            app.Entries.ModifyFromViewPage(1, newEntryData);
         }
     }
 }

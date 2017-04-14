@@ -29,6 +29,10 @@ namespace WebAddressbookTests
         private string bDay = "";
         private string bMonth = "";
         private string bYear = "";
+        private string aDay = "";
+        private string aMonth = "";
+        private string aYear = "";
+        //private string entryGroup = "";
 
         public EntryData(string firstname, string lastname)
         {
@@ -287,5 +291,53 @@ namespace WebAddressbookTests
                 bYear = value;
             }
         }
+
+        public string ADay
+        {
+            get
+            {
+                return aDay;
+            }
+            set
+            {
+                aDay = value;
+            }
+        }
+
+        public string AMonth
+        {
+            get
+            {
+                return aMonth;
+            }
+            set
+            {
+                aMonth = value;
+            }
+        }
+
+        public string AYear
+        {
+            get
+            {
+                return aYear;
+            }
+            set
+            {
+                aYear = value;
+            }
+        }
+
+        //public string EntryGroup
+        //{
+        //    get
+        //    {
+        //        return entryGroup;
+        //    }
+        //    set
+        //    {
+        //        entryGroup = value;
+        //    }
+        //}
     }
 }

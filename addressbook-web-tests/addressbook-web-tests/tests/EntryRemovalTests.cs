@@ -11,11 +11,22 @@ namespace WebAddressbookTests
     public class EntryRemovalTests : TestBase
     {
         [Test]
-        public void EntryRemovalTestFromList()
+        public void EntryRemovalFromListTest()
+        {
+            app.Entries.RemoveFromList(1);
+        }
+
+        [Test]
+        public void EntryRemovalFromEditTest()
         {
 
-            app.Entries.RemoveFromList(4);
+            app.Entries.RemoveEntryFromEdit(1);
+        }
+        [Test]
+        public void AllEntriesRemovalTest()
+        {
 
+            app.Entries.RemoveAllEntries();
         }
     }
 }
