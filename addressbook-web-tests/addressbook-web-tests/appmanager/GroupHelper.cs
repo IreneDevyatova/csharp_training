@@ -75,7 +75,6 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
-            new SelectElement(driver.FindElement(By.Name("group_parent_id"))).SelectByText(group.GroupParentId);
             return this;
 
         }
