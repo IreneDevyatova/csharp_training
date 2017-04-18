@@ -16,8 +16,8 @@ namespace WebAddressbookTests
         public void GroupModificationTest()
         {
             GroupData newGroupData = new GroupData("Modified Group");
-            newGroupData.Header = "Modified Header";
-            newGroupData.Footer = "Modified Footer";
+            newGroupData.Header = null;
+            newGroupData.Footer = null;
             app.Groups.Modify(1, newGroupData);
         }
     }
