@@ -9,7 +9,7 @@ namespace WebAddressbookTests
 {
     [TestFixture]
 
-    class EntryModificationTests : TestBase
+    class EntryModificationTests : AuthTestBase
     {
         [Test]
         public void EntryModificationByIconTest()
