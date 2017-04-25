@@ -14,9 +14,9 @@ namespace WebAddressbookTests
         [Test]
         public void EntryModificationByIconTest()
         {
-            EntryData newEntryData = new EntryData("abyr", "abyr");
+            EntryData newEntryData = new EntryData(null, null);
             newEntryData.Address = "asdasdaddress";
-            newEntryData.Address2 = "asdasdaddress2";
+            newEntryData.Address2 = null;
             newEntryData.Company = "qweqwecompany";
             newEntryData.Email = "asdtest@mail.com";
             newEntryData.Email2 = "fghtest2@mail.com";
@@ -26,7 +26,7 @@ namespace WebAddressbookTests
             newEntryData.Homepage = "www.myhomepage.com";
             newEntryData.Middlename = "J-J.";
             newEntryData.Mobile = "113 123456 123";
-            newEntryData.Nickname = "my nickname";
+            newEntryData.Nickname = null;
             newEntryData.Notes = "some notes are here";
             newEntryData.Phone2 = "78970 77678 87";
             newEntryData.Title = "my title";
@@ -37,9 +37,13 @@ namespace WebAddressbookTests
             newEntryData.ADay = "13";
             newEntryData.AMonth = "March";
             newEntryData.AYear = "2011";
-            
 
-            app.Entries.ModifyByIcon(1, newEntryData);
+            List<EntryData> oldEntries = app.Entries.GetEntriesList();
+
+            app.Entries.ModifyByIcon(0, newEntryData);
+
+            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            Assert.AreEqual(oldEntries.Count, newEntries.Count);
         }
 
         [Test]
@@ -68,9 +72,13 @@ namespace WebAddressbookTests
             newEntryData.ADay = "30";
             newEntryData.AMonth = "November";
             newEntryData.AYear = "1999";
-            
 
-            app.Entries.ModifyFromViewPage(1, newEntryData);
+            List<EntryData> oldEntries = app.Entries.GetEntriesList();
+
+            app.Entries.ModifyFromViewPage(0, newEntryData);
+
+            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            Assert.AreEqual(oldEntries.Count, newEntries.Count);
         }
     }
 }

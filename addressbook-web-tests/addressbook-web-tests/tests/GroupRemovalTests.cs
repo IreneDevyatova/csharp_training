@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 
@@ -13,13 +14,27 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            app.Groups.Remove(1);
+            List<GroupData> oldGroups = app.Groups.GetGroupsList();
+
+            app.Groups.Remove(0);
+
+            List<GroupData> newGroups = app.Groups.GetGroupsList();
+
+            oldGroups.RemoveAt(0);
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
-        [Test]
-        public void GroupsRemovalTest()
-        {
-            app.Groups.RemoveSelectedGroups(1, 2);
-        }
+        //[Test]
+        //public void GroupsRemovalTest()
+        //{
+        //    List<GroupData> oldGroups = app.Groups.GetGroupsList();
+
+        //    app.Groups.RemoveSelectedGroups(0, 1);
+
+        //    List<GroupData> newGroups = app.Groups.GetGroupsList();
+
+        //    oldGroups.RemoveRange(0, 1);
+        //    Assert.AreEqual(oldGroups, newGroups);
+        //}
     }
 }

@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -16,7 +17,6 @@ namespace WebAddressbookTests
         [Test]
         public void EntryCreationTest()
         {
-            
             EntryData entry = new EntryData("irene", "devyatova");
             entry.Address = "";
             entry.Address2 = "";
@@ -40,9 +40,14 @@ namespace WebAddressbookTests
             entry.ADay = "";
             entry.AMonth = "-";
             entry.AYear = "";
-          //  entry.EntryGroup = "";
+            //  entry.EntryGroup = "";
+
+            List<EntryData> oldEntries = app.Entries.GetEntriesList();
 
             app.Entries.Create(entry);
+
+            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            Assert.AreEqual(oldEntries.Count + 1, newEntries.Count);
         }
 
         [Test]
@@ -71,9 +76,14 @@ namespace WebAddressbookTests
             entry.ADay = "";
             entry.AMonth = "-";
             entry.AYear = "";
-           // entry.EntryGroup = "";
+            // entry.EntryGroup = "";
+
+            List<EntryData> oldEntries = app.Entries.GetEntriesList();
 
             app.Entries.Create(entry);
+
+            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            Assert.AreEqual(oldEntries.Count + 1, newEntries.Count);
         }
 
         [Test]
@@ -102,13 +112,15 @@ namespace WebAddressbookTests
             entry.ADay = "6";
             entry.AMonth = "October";
             entry.AYear = "2011";
-          //  entry.EntryGroup = "q";
+            //  entry.EntryGroup = "q";
+
+            List<EntryData> oldEntries = app.Entries.GetEntriesList();
 
             app.Entries.Create(entry);
+
+            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            Assert.AreEqual(oldEntries.Count + 1, newEntries.Count);
         }
-        
-
-
     }
 }
 

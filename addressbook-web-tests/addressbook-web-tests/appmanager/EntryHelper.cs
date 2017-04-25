@@ -16,6 +16,18 @@ namespace WebAddressbookTests
         {
         }
 
+        public List<EntryData> GetEntriesList()
+        {
+            List<EntryData> entries = new List<EntryData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in elements)
+            {
+                entries.Add(new EntryData(element.Text));
+            }
+            return entries;
+        }
+
         public EntryHelper Create(EntryData entry)
         {
             manager.Navigator.GoToCreateEntryPage();
@@ -124,13 +136,13 @@ namespace WebAddressbookTests
 
         public EntryHelper SelectEntry(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
         public EntryHelper InitEntryModificationByIcon(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" +index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index+1) + "]")).Click();
             return this;
         }
 
@@ -142,7 +154,7 @@ namespace WebAddressbookTests
 
         public EntryHelper InitEntryModificationFromViewPage(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Details'])["+ index +"]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Details'])["+ (index+1) +"]")).Click();
             driver.FindElement(By.Name("modifiy")).Click();
             return this;
         }
