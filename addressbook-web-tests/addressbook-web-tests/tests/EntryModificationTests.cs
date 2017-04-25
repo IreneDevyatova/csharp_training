@@ -15,6 +15,7 @@ namespace WebAddressbookTests
         public void EntryModificationByIconTest()
         {
             EntryData newEntryData = new EntryData(null, null);
+            
             newEntryData.Address = "asdasdaddress";
             newEntryData.Address2 = null;
             newEntryData.Company = "qweqwecompany";
@@ -43,13 +44,18 @@ namespace WebAddressbookTests
             app.Entries.ModifyByIcon(0, newEntryData);
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
-            Assert.AreEqual(oldEntries.Count, newEntries.Count);
+            oldEntries[0].Firstname = newEntryData.Firstname;
+            oldEntries[0].Lastname = newEntryData.Lastname;
+            oldEntries.Sort();
+            newEntries.Sort();
+            Assert.AreEqual(oldEntries, newEntries);
         }
 
         [Test]
         public void EntryModificationFromViewPageTest()
         {
             EntryData newEntryData = new EntryData("asd", "qwe");
+            
             newEntryData.Address = "address";
             newEntryData.Address2 = "address2";
             newEntryData.Company = "company";
@@ -78,7 +84,11 @@ namespace WebAddressbookTests
             app.Entries.ModifyFromViewPage(0, newEntryData);
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
-            Assert.AreEqual(oldEntries.Count, newEntries.Count);
+            oldEntries[0].Firstname = newEntryData.Firstname;
+            oldEntries[0].Lastname = newEntryData.Lastname;
+            oldEntries.Sort();
+            newEntries.Sort();
+            Assert.AreEqual(oldEntries, newEntries);
         }
     }
 }

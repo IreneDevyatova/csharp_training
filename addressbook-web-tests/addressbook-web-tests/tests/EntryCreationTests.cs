@@ -18,6 +18,7 @@ namespace WebAddressbookTests
         public void EntryCreationTest()
         {
             EntryData entry = new EntryData("irene", "devyatova");
+            
             entry.Address = "";
             entry.Address2 = "";
             entry.Company = "";
@@ -47,13 +48,17 @@ namespace WebAddressbookTests
             app.Entries.Create(entry);
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
-            Assert.AreEqual(oldEntries.Count + 1, newEntries.Count);
+            oldEntries.Add(entry);
+            oldEntries.Sort();
+            newEntries.Sort();
+            Assert.AreEqual(oldEntries, newEntries);
         }
 
         [Test]
         public void EmptyEntryCreationTest()
         {
             EntryData entry = new EntryData("", "");
+            
             entry.Address = "";
             entry.Address2 = "";
             entry.Company = "";
@@ -83,13 +88,17 @@ namespace WebAddressbookTests
             app.Entries.Create(entry);
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
-            Assert.AreEqual(oldEntries.Count + 1, newEntries.Count);
+            oldEntries.Add(entry);
+            oldEntries.Sort();
+            newEntries.Sort();
+            Assert.AreEqual(oldEntries, newEntries);
         }
 
         [Test]
         public void FilledInFormEntryCreationTest()
         {
             EntryData entry = new EntryData("test", "user");
+            
             entry.Address = "asdasdaddress";
             entry.Address2 = "asdasdaddress2";
             entry.Company = "qweqwecompany";
@@ -119,7 +128,10 @@ namespace WebAddressbookTests
             app.Entries.Create(entry);
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
-            Assert.AreEqual(oldEntries.Count + 1, newEntries.Count);
+            oldEntries.Add(entry);
+            oldEntries.Sort();
+            newEntries.Sort();
+            Assert.AreEqual(oldEntries, newEntries);
         }
     }
 }

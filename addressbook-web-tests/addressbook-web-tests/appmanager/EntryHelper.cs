@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
-                entries.Add(new EntryData(element.Text));
+                entries.Add(new EntryData(element.Text, element.Text));
             }
             return entries;
         }
