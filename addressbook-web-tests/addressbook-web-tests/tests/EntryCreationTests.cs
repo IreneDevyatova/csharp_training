@@ -41,11 +41,12 @@ namespace WebAddressbookTests
             entry.ADay = "";
             entry.AMonth = "-";
             entry.AYear = "";
-            //  entry.EntryGroup = "";
+            
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
 
             app.Entries.Create(entry);
+            Assert.AreEqual(oldEntries.Count + 1, app.Entries.GetEntriesCount());
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
             oldEntries.Add(entry);
@@ -84,8 +85,10 @@ namespace WebAddressbookTests
             // entry.EntryGroup = "";
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
+            
 
             app.Entries.Create(entry);
+            Assert.AreEqual(oldEntries.Count + 1, app.Entries.GetEntriesCount());
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
             oldEntries.Add(entry);
@@ -124,8 +127,10 @@ namespace WebAddressbookTests
             //  entry.EntryGroup = "q";
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
+            
 
             app.Entries.Create(entry);
+            Assert.AreEqual(oldEntries.Count + 1, app.Entries.GetEntriesCount());
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
             oldEntries.Add(entry);

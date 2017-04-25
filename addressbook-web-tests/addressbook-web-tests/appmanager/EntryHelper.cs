@@ -16,16 +16,26 @@ namespace WebAddressbookTests
         {
         }
 
+        private List<EntryData> entryCache = null; 
+
         public List<EntryData> GetEntriesList()
         {
-            List<EntryData> entries = new List<EntryData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
+            if(entryCache == null)
             {
-                entries.Add(new EntryData(element.Text, element.Text));
+                entryCache = new List<EntryData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
+                {
+                    entryCache.Add(new EntryData(element.Text, element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
+
             }
-            return entries;
+            
+            return new List<EntryData>(entryCache);
         }
 
         public EntryHelper Create(EntryData entry)
@@ -35,6 +45,11 @@ namespace WebAddressbookTests
             SubmitEntryCreation();
             ReturnToHomePage();
             return this;
+        }
+
+        public int GetEntriesCount()
+        {
+            return driver.FindElements(By.Name("entry")).Count;
         }
 
         public EntryHelper ModifyByIcon(int v, EntryData newEntryData)
@@ -66,6 +81,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             SelectEntry(v);
             RemoveEntryFromList();
+            entryCache = null;
 
             return this;
         }
@@ -75,6 +91,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             InitEntryModificationByIcon(v);
             RemoveEntryFromEdit();
+            entryCache = null;
 
             return this;
         }
@@ -84,6 +101,8 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             SelectAll();
             RemoveEntryFromList();
+            entryCache = null;
+
             return this;
         }
      
@@ -117,7 +136,7 @@ namespace WebAddressbookTests
            
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(entry.ADay);
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(entry.AMonth);
-           // new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(entry.EntryGroup);
+           
 
             return this;
         }
@@ -125,6 +144,7 @@ namespace WebAddressbookTests
         public EntryHelper SubmitEntryCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            entryCache = null;
             return this;
         }
 
@@ -149,6 +169,7 @@ namespace WebAddressbookTests
         public EntryHelper SubmitEntryModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            entryCache = null;
             return this;
         }
 
@@ -170,6 +191,8 @@ namespace WebAddressbookTests
         {
            
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            entryCache = null;
+
             return this;
         }
 

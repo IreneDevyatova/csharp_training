@@ -14,7 +14,7 @@ namespace WebAddressbookTests
         [Test]
         public void EntryModificationByIconTest()
         {
-            EntryData newEntryData = new EntryData(null, null);
+            EntryData newEntryData = new EntryData("asdasdasd", "dhgfhdgfhdgf");
             
             newEntryData.Address = "asdasdaddress";
             newEntryData.Address2 = null;
@@ -40,8 +40,10 @@ namespace WebAddressbookTests
             newEntryData.AYear = "2011";
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
+            EntryData oldEntryData = oldEntries[0];
 
             app.Entries.ModifyByIcon(0, newEntryData);
+            Assert.AreEqual(oldEntries.Count, app.Entries.GetEntriesCount());
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
             oldEntries[0].Firstname = newEntryData.Firstname;
@@ -49,6 +51,15 @@ namespace WebAddressbookTests
             oldEntries.Sort();
             newEntries.Sort();
             Assert.AreEqual(oldEntries, newEntries);
+
+            foreach (EntryData entry in newEntries)
+            {
+                if (entry.Id == oldEntryData.Id)
+                {
+                    Assert.AreEqual(newEntryData.Lastname, entry.Lastname);
+                    Assert.AreEqual(newEntryData.Firstname, entry.Firstname);
+                }
+            }
         }
 
         [Test]
@@ -80,8 +91,11 @@ namespace WebAddressbookTests
             newEntryData.AYear = "1999";
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
+            EntryData oldEntryData = oldEntries[0];
+
 
             app.Entries.ModifyFromViewPage(0, newEntryData);
+            Assert.AreEqual(oldEntries.Count, app.Entries.GetEntriesCount());
 
             List<EntryData> newEntries = app.Entries.GetEntriesList();
             oldEntries[0].Firstname = newEntryData.Firstname;
@@ -89,6 +103,15 @@ namespace WebAddressbookTests
             oldEntries.Sort();
             newEntries.Sort();
             Assert.AreEqual(oldEntries, newEntries);
+
+            foreach (EntryData entry in newEntries)
+            {
+                if (entry.Id == oldEntryData.Id)
+                {
+                    Assert.AreEqual(newEntryData.Lastname, entry.Lastname);
+                    Assert.AreEqual(newEntryData.Firstname, entry.Firstname); 
+                }
+            }
         }
     }
 }
