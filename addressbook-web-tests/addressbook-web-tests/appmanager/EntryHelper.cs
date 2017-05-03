@@ -24,17 +24,17 @@ namespace WebAddressbookTests
             {
                 entryCache = new List<EntryData>();
                 manager.Navigator.GoToHomePage();
-                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-                foreach (IWebElement element in elements)
+                IList<IWebElement> cells = driver.FindElements(By.CssSelector("td"));
+                foreach (IWebElement cell in cells)
                 {
-                    entryCache.Add(new EntryData(element.Text, element.Text)
+                    entryCache.Add(new EntryData(cells[1].Text, cells[2].Text)
                     {
-                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                        Id = cell.FindElement(By.XPath("(//input[@name='selected[]'])[1]")).GetAttribute("value")
                     });
                 }
 
             }
-            
+
             return new List<EntryData>(entryCache);
         }
 
@@ -49,7 +49,7 @@ namespace WebAddressbookTests
 
         public int GetEntriesCount()
         {
-            return driver.FindElements(By.Name("entry")).Count;
+            return driver.FindElements(By.CssSelector("td")).Count;
         }
 
         public EntryHelper ModifyByIcon(int v, EntryData newEntryData)
@@ -184,6 +184,7 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            entryCache = null;
             return this;
         }
 
