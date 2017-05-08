@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
     public class EntryData : IEquatable<EntryData>, IComparable<EntryData>
     {
-       
+        private string allPhones;
+        private string allEmails;
+
         public EntryData(string firstname, string lastname)
         {
             Firstname = firstname;
@@ -25,16 +28,16 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return (Firstname == other.Firstname) & (Lastname == other.Lastname);
+            return (Firstname == other.Firstname) && (Lastname == other.Lastname);
         }
 
         public override int GetHashCode()
         {
-            return Firstname.GetHashCode() ^ Lastname.GetHashCode();
+            return (Firstname + " " + Lastname).GetHashCode();
         }
         public override string ToString()
         {
-            return "lastname=" + Lastname + " firstname=" + Firstname; 
+            return Firstname + " " + Lastname; 
         }
 
         public string Firstname { get; set; }
@@ -47,7 +50,15 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname) + Lastname.CompareTo(other.Lastname);
+            int result = Lastname.CompareTo(other.Lastname);
+            if (result != 0)
+            {
+                return result;
+            }
+            else
+            {
+                return Firstname.CompareTo(other.Firstname);
+            }
         }
 
         public string Middlename { get; set; }
@@ -67,13 +78,71 @@ namespace WebAddressbookTests
         public string Work { get; set; }
         
         public string Fax { get; set; }
-        
+
+        public string AllPhones
+        {
+            get
+            { 
+                if(allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work) + CleanUp(Phone2)).Trim();
+                }
+            }
+
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if(phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+        }
+
         public string Email { get; set; }
         
         public string Email2 { get; set; }
          
         public string Email3 { get; set; }
-        
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return Clean(Email) + Clean(Email2) + Clean(Email3).Trim();
+                }
+            }
+
+            set
+            {
+                allEmails = value;
+            }
+        }
+
+        public string Clean(string email1)
+        {
+            if (email1 == null || email1 == "")
+            {
+                return "";
+            }
+            return email1.Replace(" ", "") + "\r\n";
+        }
+    
         public string Homepage { get; set; }
 
         public string Address2 { get; set; }
