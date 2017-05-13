@@ -27,12 +27,13 @@ namespace WebAddressbookTests
             {
                 entryCache = new List<EntryData>();
                 manager.Navigator.GoToHomePage();
-                IList<IWebElement> cells = driver.FindElements(By.CssSelector("td"));
-                foreach (IWebElement cell in cells)
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
                 {
-                    entryCache.Add(new EntryData(cells[1].Text, cells[2].Text)
+                    IList<IWebElement> cells = driver.FindElements(By.CssSelector("td"));
+                    entryCache.Add(new EntryData(cells[2].Text, cells[1].Text)
                     {
-                        Id = cell.FindElement(By.XPath("(//input[@name='selected[]'])[1]")).GetAttribute("value")
+                        Id = element.FindElement(By.XPath("(//input[@name='selected[]'])[1]")).GetAttribute("value")
                     });
                 }
 
@@ -40,6 +41,8 @@ namespace WebAddressbookTests
 
             return new List<EntryData>(entryCache);
         }
+
+      
 
         public EntryHelper Create(EntryData entry)
         {
@@ -52,7 +55,7 @@ namespace WebAddressbookTests
 
         public int GetEntriesCount()
         {
-            return driver.FindElements(By.CssSelector("td")).Count;
+            return driver.FindElements(By.Name("entry")).Count;
         }
 
         public EntryHelper ModifyByIcon(int v, EntryData newEntryData)
@@ -259,6 +262,22 @@ namespace WebAddressbookTests
                 Email3 = email3
 
             };
+        }
+
+        public EntryData GetEntryInformationFromView(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            OpenViewEntryForm(0);
+
+            throw new NotImplementedException();
+        }
+
+        public EntryHelper OpenViewEntryForm(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+            return this;
         }
 
         public int GetNumberOfSearchResults()

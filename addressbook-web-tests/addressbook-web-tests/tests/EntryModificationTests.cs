@@ -56,8 +56,8 @@ namespace WebAddressbookTests
             {
                 if (entry.Id == oldEntryData.Id)
                 {
-                    Assert.AreEqual(newEntryData.Lastname, entry.Lastname);
                     Assert.AreEqual(newEntryData.Firstname, entry.Firstname);
+                    Assert.AreEqual(newEntryData.Lastname, entry.Lastname);
                 }
             }
         }
@@ -108,8 +108,8 @@ namespace WebAddressbookTests
             {
                 if (entry.Id == oldEntryData.Id)
                 {
-                    Assert.AreEqual(newEntryData.Lastname, entry.Lastname);
-                    Assert.AreEqual(newEntryData.Firstname, entry.Firstname); 
+                    Assert.AreEqual(newEntryData.Firstname, entry.Firstname);
+                    Assert.AreEqual(newEntryData.Lastname, entry.Lastname); 
                 }
             }
         }

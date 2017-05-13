@@ -105,7 +105,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            return Regex.Replace(phone, "[- ()]", "") + "\r\n";
         }
 
         public string Email { get; set; }
