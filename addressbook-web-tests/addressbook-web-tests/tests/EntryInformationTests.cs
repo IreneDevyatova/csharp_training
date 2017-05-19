@@ -26,10 +26,11 @@ namespace WebAddressbookTests
         [Test]
         public void TestEntryInformationFromView()
         {
-            EntryData fromView = app.Entries.GetEntryInformationFromView(0);
-            EntryData fromForm = app.Entries.GetEntryInformationFromEditForm(0);
-
-            //verifications
+            string fromEditForm = app.Entries.GetEntryInfoFromEditForm(0);
+            string fromViewForm = app.Entries.GetEntryInfoFromViewForm(0);
+            
+            Assert.AreEqual(fromEditForm, fromViewForm);
+            
         }
     }
 }
