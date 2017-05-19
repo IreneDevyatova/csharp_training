@@ -30,10 +30,10 @@ namespace WebAddressbookTests
                 ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
                 foreach (IWebElement element in elements)
                 {
-                    IList<IWebElement> cells = driver.FindElements(By.CssSelector("td"));
+                    IList<IWebElement> cells = element.FindElements(By.CssSelector("td"));
                     entryCache.Add(new EntryData(cells[2].Text, cells[1].Text)
                     {
-                        Id = element.FindElement(By.XPath("(//input[@name='selected[]'])[1]")).GetAttribute("value")
+                        Id = element.FindElement(By.XPath("(.//input[@name='selected[]'])")).GetAttribute("value")
                     });
                 }
 
@@ -55,6 +55,7 @@ namespace WebAddressbookTests
 
         public int GetEntriesCount()
         {
+            manager.Navigator.GoToHomePage();
             return driver.FindElements(By.Name("entry")).Count;
         }
 
