@@ -109,7 +109,7 @@ namespace WebAddressbookTests
             entry.Email2 = "fghtest2@mail.com";
             entry.Email3 = "fghtest3@mail.com";
             entry.Fax = "0001 2312 31";
-            entry.Home = "home, sweet home";
+            entry.Home = "345345345";
             entry.Homepage = "www.myhomepage.com";
             entry.Middlename = "J-J.";
             entry.Mobile = "113 123456 123";
@@ -117,7 +117,7 @@ namespace WebAddressbookTests
             entry.Notes = "some notes are here";
             entry.Phone2 = "78970 77678 87";
             entry.Title = "my title";
-            entry.Work = "my work";
+            entry.Work = "345345345";
             entry.BDay = "12";
             entry.BMonth = "July";
             entry.BYear = "1987";

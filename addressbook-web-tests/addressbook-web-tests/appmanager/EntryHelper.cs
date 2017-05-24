@@ -277,11 +277,42 @@ namespace WebAddressbookTests
             string title = driver.FindElement(By.Name("title")).GetAttribute("value");
             string company = driver.FindElement(By.Name("company")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
             string home = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string filledHome = "H:" + home;
+            if (home != null || home != string.Empty)
+            {
+                return filledHome;
+            }
+           
             string mobile = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string filledMobile = "M:" + mobile;
+            if (mobile != null || mobile != string.Empty)
+            {
+                return filledMobile;
+            }
+
             string work = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string filledWork = "W:" + work;
+            if (work != null || work!= string.Empty)
+            {
+                return filledWork;
+            }
+
             string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
+            string filledFax = "F:" + fax;
+            if (fax != null || fax != string.Empty)
+            {
+                return filledFax;
+            }
+
             string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+            string filledHomepage = "Homepage:" + homepage;
+            if (homepage != null || homepage != string.Empty)
+            {
+                return filledHomepage;
+            }
+
             string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
             string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
@@ -290,7 +321,7 @@ namespace WebAddressbookTests
             string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
 
             string editFormData = (firstname + middlename + lastname + nickname + title + company 
-                + address + home + mobile + work + fax + homepage + address2 + phone2 + email + email2 + email3 + notes);
+                + address + filledHome + filledMobile + filledWork + filledFax + filledHomepage + address2 + phone2 + email + email2 + email3 + notes);
 
             
             return editFormData;
