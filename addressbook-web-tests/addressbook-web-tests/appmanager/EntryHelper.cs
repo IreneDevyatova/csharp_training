@@ -36,13 +36,10 @@ namespace WebAddressbookTests
                         Id = element.FindElement(By.XPath("(.//input[@name='selected[]'])")).GetAttribute("value")
                     });
                 }
-
             }
 
             return new List<EntryData>(entryCache);
         }
-
-      
 
         public EntryHelper Create(EntryData entry)
         {
@@ -112,7 +109,7 @@ namespace WebAddressbookTests
 
             return this;
         }
-     
+
         public EntryHelper FillInEntryForm(EntryData entry)
         {
             Type(By.Name("firstname"), entry.Firstname);
@@ -136,14 +133,11 @@ namespace WebAddressbookTests
             Type(By.Name("byear"), entry.BYear);
             Type(By.Name("ayear"), entry.AYear);
 
-
-
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(entry.BDay);
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(entry.BMonth);
            
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(entry.ADay);
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(entry.AMonth);
-           
 
             return this;
         }
@@ -229,7 +223,6 @@ namespace WebAddressbookTests
                 Address = address,
                 AllPhones = allPhones,
                 AllEmails = allEmails
-            
             };
 
         }
@@ -249,7 +242,6 @@ namespace WebAddressbookTests
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-
 
             return new EntryData(firstname, lastname)
             {
@@ -279,63 +271,42 @@ namespace WebAddressbookTests
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
             string home = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string filledHome = "H:" + home;
-            if (home != null || home != string.Empty)
-            {
-                return filledHome;
-            }
-           
+            if (!string.IsNullOrEmpty(home)) home = "H:" + home;
+
             string mobile = driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string filledMobile = "M:" + mobile;
-            if (mobile != null || mobile != string.Empty)
-            {
-                return filledMobile;
-            }
+            if (!string.IsNullOrEmpty(mobile)) mobile = "M:" + mobile;
 
             string work = driver.FindElement(By.Name("work")).GetAttribute("value");
-            string filledWork = "W:" + work;
-            if (work != null || work!= string.Empty)
-            {
-                return filledWork;
-            }
+            if (!string.IsNullOrEmpty(work)) work = "W:" + work;
 
             string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
-            string filledFax = "F:" + fax;
-            if (fax != null || fax != string.Empty)
-            {
-                return filledFax;
-            }
+            if (!string.IsNullOrEmpty(fax)) fax = "F:" + fax;
 
             string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
-            string filledHomepage = "Homepage:" + homepage;
-            if (homepage != null || homepage != string.Empty)
-            {
-                return filledHomepage;
-            }
+            if (!string.IsNullOrEmpty(homepage)) homepage = "Homepage:" + homepage;
 
             string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
+
             string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(phone2)) phone2 = "P:" + phone2;
+
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
             string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
 
             string editFormData = (firstname + middlename + lastname + nickname + title + company 
-                + address + filledHome + filledMobile + filledWork + filledFax + filledHomepage + address2 + phone2 + email + email2 + email3 + notes);
-
+                + address + home + mobile + work + fax + email + email2 + email3 + homepage + address2 + phone2 + notes).Replace(" ", "");
             
             return editFormData;
         }
-
-
 
         public string GetEntryInfoFromViewForm(int index)
         {
             manager.Navigator.GoToHomePage();
             OpenViewEntryForm(0);
-            string content = driver.FindElement(By.Id("content")).Text.Replace("\r\n", "");
+            string content = driver.FindElement(By.Id("content")).Text.Replace("\r\n", "").Replace(" ", "");
             return content;
-
         }
 
         public EntryHelper OpenViewEntryForm(int index)

@@ -82,7 +82,7 @@ namespace WebAddressbookTests
             entry.ADay = "";
             entry.AMonth = "-";
             entry.AYear = "";
-            // entry.EntryGroup = "";
+            
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
             
@@ -118,13 +118,13 @@ namespace WebAddressbookTests
             entry.Phone2 = "78970 77678 87";
             entry.Title = "my title";
             entry.Work = "345345345";
-            entry.BDay = "12";
-            entry.BMonth = "July";
-            entry.BYear = "1987";
-            entry.ADay = "6";
-            entry.AMonth = "October";
-            entry.AYear = "2011";
-            //  entry.EntryGroup = "q";
+            entry.BDay = "";
+            entry.BMonth = "";
+            entry.BYear = "";
+            entry.ADay = "";
+            entry.AMonth = "";
+            entry.AYear = "";
+            
 
             List<EntryData> oldEntries = app.Entries.GetEntriesList();
             
