@@ -26,7 +26,6 @@ namespace WebAddressbookTests
                 return entries;
            }
        
-    
 
         [Test, TestCaseSource("RandomEntryDataProvider")]
 

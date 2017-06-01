@@ -133,11 +133,11 @@ namespace WebAddressbookTests
             Type(By.Name("byear"), entry.BYear);
             Type(By.Name("ayear"), entry.AYear);
 
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(entry.BDay);
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(entry.BMonth);
+            //new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(entry.BDay);
+            //new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(entry.BMonth);
            
-            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(entry.ADay);
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(entry.AMonth);
+            //new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(entry.ADay);
+            //new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(entry.AMonth);
 
             return this;
         }

@@ -37,7 +37,7 @@ namespace WebAddressbookTests
         }
         public override string ToString()
         {
-            return Firstname + " " + Lastname; 
+            return "Forename = " + Firstname + "\nSurname = " + Lastname;
         }
 
         public string Firstname { get; set; }
