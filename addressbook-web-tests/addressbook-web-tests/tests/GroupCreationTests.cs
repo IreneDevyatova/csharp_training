@@ -23,8 +23,6 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        
-
         [Test, TestCaseSource("RandomGroupDataProvider")]
 
         public void GroupCreationTest(GroupData group)
@@ -40,7 +38,6 @@ namespace WebAddressbookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
-
 
         [Test]
         public void BadNameGroupCreationTest()
