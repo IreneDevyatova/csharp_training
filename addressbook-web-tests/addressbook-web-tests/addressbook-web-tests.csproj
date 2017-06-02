@@ -96,9 +96,7 @@
     <None Include="groups.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="groups.xlsxl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="groups.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
