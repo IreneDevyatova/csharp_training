@@ -7,6 +7,10 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace WebAddressbookTests
 {
@@ -25,9 +29,24 @@ namespace WebAddressbookTests
 
                 return entries;
            }
-       
 
-        [Test, TestCaseSource("RandomEntryDataProvider")]
+        public static IEnumerable<EntryData> EntryDataFromXmlFile()
+        {
+
+            return (List<EntryData>)
+                new XmlSerializer(typeof(List<EntryData>))
+                .Deserialize(new StreamReader(@"entries.xml"));
+        }
+
+        public static IEnumerable<EntryData> EntryDataFromJsonFile()
+        {
+
+            return JsonConvert.DeserializeObject<List<EntryData>>(
+                File.ReadAllText(@"groups.json"));
+        }
+
+
+        [Test, TestCaseSource("EntryDataFromXmlFile")]
 
         public void EntryCreationTest(EntryData entry)
         {

@@ -18,6 +18,11 @@ namespace WebAddressbookTests
             Lastname = lastname;
         }
 
+        public EntryData()
+        {
+         
+        }
+
         public bool Equals(EntryData other)
         {
             if (Object.ReferenceEquals(other, null))

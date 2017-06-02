@@ -33,6 +33,10 @@ namespace WebAddressbookTests
             return "name=" + Name +"\nheader= " + Header + "\nfooter= " + Footer ;
         }
 
+        public GroupData()
+        {
+        }
+
         public GroupData(string name)
         {
             Name = name;
