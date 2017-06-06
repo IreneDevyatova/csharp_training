@@ -75,6 +75,7 @@
     <Compile Include="tests\AddingEntryToGroupTests.cs" />
     <Compile Include="tests\AuthTestBase.cs" />
     <Compile Include="tests\EntryInformationTests.cs" />
+    <Compile Include="tests\EntryRemovalFromGroupTests.cs" />
     <Compile Include="tests\EntryRemovalTests.cs" />
     <Compile Include="tests\EntryModificationTests.cs" />
     <Compile Include="tests\EntryTestBase.cs" />

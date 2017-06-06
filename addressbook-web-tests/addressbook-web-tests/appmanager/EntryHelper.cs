@@ -93,6 +93,26 @@ namespace WebAddressbookTests
                 .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
         }
 
+        public void RemoveEntryFromGroup(EntryData entry, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectGrouopFromFilter();
+            CommitEntryRemovalFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void CommitEntryRemovalFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        private void SelectGrouopFromFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(GroupData.GetAll()[0].Name);
+        }
+
         private void CommitAddingEntryToGroup()
         {
             driver.FindElement(By.Name("add")).Click();
