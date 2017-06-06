@@ -41,6 +41,37 @@ namespace WebAddressbookTests
             return new List<EntryData>(entryCache);
         }
 
+        public void AddEntryToGroup(EntryData entry, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectEntryToAdd(entry.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingEntryToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void CommitAddingEntryToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void SelectEntryToAdd(string entryId)
+        {
+            driver.FindElement(By.Id(entryId)).Click();
+        }
+
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
         public EntryHelper Create(EntryData entry)
         {
             manager.Navigator.GoToCreateEntryPage();
