@@ -82,7 +82,7 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        [Test, TestCaseSource("GroupDataFromExcelFile")]
+        [Test, TestCaseSource("GroupDataFromXmlFile")]
 
         public void GroupCreationTest(GroupData group)
         {
@@ -119,14 +119,14 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups, newGroups);
         }
 
-        [Test]
-        public void TestDBConnectivity()
-        {
-            foreach (EntryData entry in EntryData.GetAll())
-            {
-                System.Console.Out.Write(entry.Deprecated);
-            }
+        //[Test]
+        //public void TestDBConnectivityGroups()
+        //{
+        //    foreach (EntryData entry in EntryData.GetAll())
+        //    {
+        //        System.Console.Out.Write(entry.Deprecated);
+        //    }
 
-        }
+        //}
     }
 }

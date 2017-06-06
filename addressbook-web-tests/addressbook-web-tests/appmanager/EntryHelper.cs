@@ -19,7 +19,48 @@ namespace WebAddressbookTests
         {
         }
 
-        private List<EntryData> entryCache = null; 
+        private List<EntryData> entryCache = null;
+
+        public EntryHelper RemoveFromList(EntryData entry)
+        {
+                SelectEntry(entry.Id);
+                RemoveEntryFromList();
+               
+                return this;
+        }
+
+        public EntryHelper SelectEntry(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
+            return this;
+        }
+
+        public EntryHelper ModifyEntry(EntryData entry, EntryData newEntryData)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectEntry(entry.Id);
+            InitEntryModification(entry.Id);
+            FillInEntryForm(newEntryData);
+            SubmitEntryModification();
+            ReturnToHomePage();
+
+            return this;
+        }
+
+        public EntryHelper InitEntryModification(string id)
+        {
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in elements)
+            {
+                string s = element.FindElement(By.Name("selected[]")).GetAttribute("Value");
+                if (s == id)
+                {
+                    element.FindElement(By.XPath("(.//img[@title='Edit'])")).Click();
+                }
+            }
+                
+            return this;
+        }
 
         public List<EntryData> GetEntriesList()
         {

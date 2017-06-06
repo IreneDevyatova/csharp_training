@@ -117,6 +117,19 @@ namespace WebAddressbookTests
 
         }
 
+        public GroupHelper ModifyGroup(GroupData group, GroupData newGroupData)
+        {
+            manager.Navigator.GoToGroupsPage();
+
+            SelectGroup(group.Id);
+            InitGroupModification();
+            FillInGroupForm(newGroupData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+
+            return this;
+        }
+
         public GroupHelper RemoveSelectedGroups(int v, int i)
         {
             manager.Navigator.GoToGroupsPage();

@@ -178,8 +178,6 @@ namespace WebAddressbookTests
         [Column(Name = "deprecated")]
         public string Deprecated { get; set; }
 
-        //public string EntryGroup { get; set; }
-
         public static List<EntryData> GetAll()
         {
             using (AddressbookDB db = new AddressbookDB())

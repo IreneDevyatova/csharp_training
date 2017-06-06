@@ -15,7 +15,7 @@ using System.IO;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class EntryCreationTests : AuthTestBase
+    public class EntryCreationTests : EntryTestBase
     {
 
            public static IEnumerable<EntryData> RandomEntryDataProvider()
@@ -50,17 +50,31 @@ namespace WebAddressbookTests
 
         public void EntryCreationTest(EntryData entry)
         {
-            List<EntryData> oldEntries = app.Entries.GetEntriesList();
+            List<EntryData> oldEntries = EntryData.GetAll();
 
             app.Entries.Create(entry);
             Assert.AreEqual(oldEntries.Count + 1, app.Entries.GetEntriesCount());
 
-            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            List<EntryData> newEntries = EntryData.GetAll();
             oldEntries.Add(entry);
             oldEntries.Sort();
             newEntries.Sort();
             Assert.AreEqual(oldEntries, newEntries);
         }
-    }
+
+        //[Test]
+        //public void TestDBConnectivityEntries()
+        //{
+        //    DateTime start = DateTime.Now;
+        //    List<EntryData> fromUi = app.Entries.GetEntriesList();
+        //    DateTime end = DateTime.Now;
+        //    System.Console.Out.WriteLine(end.Subtract(start));
+
+        //    start = DateTime.Now;
+        //    List<EntryData> fromDb = EntryData.GetAll();
+        //     end = DateTime.Now;
+        //     System.Console.Out.WriteLine(end.Subtract(start));
+        //  }
+}
 }
 

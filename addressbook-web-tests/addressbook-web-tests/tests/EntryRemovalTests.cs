@@ -8,49 +8,48 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class EntryRemovalTests : AuthTestBase
+    public class EntryRemovalTests : EntryTestBase
     {
         [Test]
         public void EntryRemovalFromListTest()
         {
-            List<EntryData> oldEntries = app.Entries.GetEntriesList();
-
-            app.Entries.RemoveFromList(0);
+            List<EntryData> oldEntries = EntryData.GetAll();
+            EntryData toBeRemoved = oldEntries[0];
+            app.Entries.RemoveFromList(toBeRemoved);
 
             Assert.AreEqual(oldEntries.Count - 1, app.Entries.GetEntriesCount());
 
-            List<EntryData> newEntries = app.Entries.GetEntriesList();
+            List<EntryData> newEntries = EntryData.GetAll();
 
-            EntryData entryToBeRemoved = oldEntries[0];
             oldEntries.RemoveAt(0);
             Assert.AreEqual(oldEntries, newEntries);
 
             foreach(EntryData entry in newEntries)
             {
-                Assert.AreNotEqual(entry.Id, entryToBeRemoved.Id);
+                Assert.AreNotEqual(entry.Id, toBeRemoved.Id);
             }
         }
 
-        [Test]
-        public void EntryRemovalFromEditTest()
-        {
-            List<EntryData> oldEntries = app.Entries.GetEntriesList();
+        //[Test]
+        //public void EntryRemovalFromEditTest()
+        //{
+        //    List<EntryData> oldEntries = app.Entries.GetEntriesList();
             
 
-            app.Entries.RemoveEntryFromEdit(0);
-            Assert.AreEqual(oldEntries.Count - 1, app.Entries.GetEntriesCount());
+        //    app.Entries.RemoveEntryFromEdit(0);
+        //    Assert.AreEqual(oldEntries.Count - 1, app.Entries.GetEntriesCount());
 
-            List<EntryData> newEntries = app.Entries.GetEntriesList();
+        //    List<EntryData> newEntries = app.Entries.GetEntriesList();
 
-            EntryData entryToBeRemoved = oldEntries[0];
-            oldEntries.RemoveAt(0);
-            Assert.AreEqual(oldEntries, newEntries);
+        //    EntryData entryToBeRemoved = oldEntries[0];
+        //    oldEntries.RemoveAt(0);
+        //    Assert.AreEqual(oldEntries, newEntries);
 
-            foreach (EntryData entry in newEntries)
-            {
-                Assert.AreNotEqual(entry.Id, entryToBeRemoved.Id);
-            }
-        }
+        //    foreach (EntryData entry in newEntries)
+        //    {
+        //        Assert.AreNotEqual(entry.Id, entryToBeRemoved.Id);
+        //    }
+        //}
         //[Test]
         //public void AllEntriesRemovalTest()
         //{

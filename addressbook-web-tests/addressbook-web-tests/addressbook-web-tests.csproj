@@ -77,6 +77,7 @@
     <Compile Include="tests\EntryInformationTests.cs" />
     <Compile Include="tests\EntryRemovalTests.cs" />
     <Compile Include="tests\EntryModificationTests.cs" />
+    <Compile Include="tests\EntryTestBase.cs" />
     <Compile Include="tests\GroupModificationTests.cs" />
     <Compile Include="model\AccountData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />
