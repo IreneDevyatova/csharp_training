@@ -39,6 +39,8 @@ namespace WebAddressbookTests
             newEntryData.AMonth = "March";
             newEntryData.AYear = "2011";
 
+            app.Entries.CheckEntryExists();
+
             List<EntryData> oldEntries = EntryData.GetAll();
             EntryData oldEntryData = oldEntries[0];
 

@@ -13,6 +13,8 @@ namespace WebAddressbookTests
         [Test]
         public void EntryRemovalFromListTest()
         {
+            app.Entries.CheckEntryExists();
+
             List<EntryData> oldEntries = EntryData.GetAll();
             EntryData toBeRemoved = oldEntries[0];
             app.Entries.RemoveFromList(toBeRemoved);

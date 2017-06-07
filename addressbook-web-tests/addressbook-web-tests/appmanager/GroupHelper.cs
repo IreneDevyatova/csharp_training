@@ -19,8 +19,6 @@ namespace WebAddressbookTests
 
         private List<GroupData> groupCache = null;
 
-       
-
         public List<GroupData> GetGroupsList()
         {
             if(groupCache == null)
@@ -49,33 +47,18 @@ namespace WebAddressbookTests
             return this;
         }
 
+      
+
         public GroupHelper Modify(int v, GroupData newGroupData)
         {
             manager.Navigator.GoToGroupsPage();
            
-            if (GroupExists())
-            {
                 SelectGroup(v);
                 InitGroupModification();
                 FillInGroupForm(newGroupData);
                 SubmitGroupModification();
                 ReturnToGroupsPage();
-            }
-            else
-            {
-                manager.Navigator.GoToGroupsPage();
-                InitGroupCreation();
-                FillInGroupForm(newGroupData);
-                SubmitGroupCreation();
-                ReturnToGroupsPage();
-
-                SelectGroup(v);
-                InitGroupModification();
-                FillInGroupForm(newGroupData);
-                SubmitGroupModification();
-                ReturnToGroupsPage();
-            }
-
+            
             return this;
         }
 
@@ -189,8 +172,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-     
-
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -202,6 +183,15 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("edit")).Click();
             return this; ;
+        }
+
+        public void CheckGroupExists()
+        {
+            if(GroupExists() == true)
+            {
+                GroupData groupToAdd = new GroupData("new group");
+                manager.Groups.Create(groupToAdd);
+            }
         }
 
         public bool GroupExists()

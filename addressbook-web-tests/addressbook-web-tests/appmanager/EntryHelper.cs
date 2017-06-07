@@ -21,47 +21,6 @@ namespace WebAddressbookTests
 
         private List<EntryData> entryCache = null;
 
-        public EntryHelper RemoveFromList(EntryData entry)
-        {
-                SelectEntry(entry.Id);
-                RemoveEntryFromList();
-               
-                return this;
-        }
-
-        public EntryHelper SelectEntry(string id)
-        {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
-            return this;
-        }
-
-        public EntryHelper ModifyEntry(EntryData entry, EntryData newEntryData)
-        {
-            manager.Navigator.GoToHomePage();
-            SelectEntry(entry.Id);
-            InitEntryModification(entry.Id);
-            FillInEntryForm(newEntryData);
-            SubmitEntryModification();
-            ReturnToHomePage();
-
-            return this;
-        }
-
-        public EntryHelper InitEntryModification(string id)
-        {
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
-            {
-                string s = element.FindElement(By.Name("selected[]")).GetAttribute("Value");
-                if (s == id)
-                {
-                    element.FindElement(By.XPath("(.//img[@title='Edit'])")).Click();
-                }
-            }
-                
-            return this;
-        }
-
         public List<EntryData> GetEntriesList()
         {
             if(entryCache == null)
@@ -82,6 +41,12 @@ namespace WebAddressbookTests
             return new List<EntryData>(entryCache);
         }
 
+        public int GetEntriesCount()
+        {
+            manager.Navigator.GoToHomePage();
+            return driver.FindElements(By.Name("entry")).Count;
+        }
+
         public void AddEntryToGroup(EntryData entry, GroupData group)
         {
             manager.Navigator.GoToHomePage();
@@ -97,35 +62,10 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             ClearGroupFilter();
-            SelectGrouopFromFilter();
+            SelectGroupFromFilter();
             CommitEntryRemovalFromGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
-        }
-
-        private void CommitEntryRemovalFromGroup()
-        {
-            driver.FindElement(By.Name("remove")).Click();
-        }
-
-        private void SelectGrouopFromFilter()
-        {
-            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(GroupData.GetAll()[0].Name);
-        }
-
-        private void CommitAddingEntryToGroup()
-        {
-            driver.FindElement(By.Name("add")).Click();
-        }
-
-        private void SelectGroupToAdd(string name)
-        {
-            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
-        }
-
-        private void SelectEntryToAdd(string entryId)
-        {
-            driver.FindElement(By.Id(entryId)).Click();
         }
 
         private void ClearGroupFilter()
@@ -133,6 +73,31 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
 
+        private void SelectGroupFromFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(GroupData.GetAll()[0].Name);
+        }
+
+        private void SelectEntryToAdd(string entryId)
+        {
+            driver.FindElement(By.Id(entryId)).Click();
+        }
+
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void CommitAddingEntryToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        private void CommitEntryRemovalFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+        
         public EntryHelper Create(EntryData entry)
         {
             manager.Navigator.GoToCreateEntryPage();
@@ -142,10 +107,16 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public int GetEntriesCount()
+        public EntryHelper ModifyEntry(EntryData entry, EntryData newEntryData)
         {
             manager.Navigator.GoToHomePage();
-            return driver.FindElements(By.Name("entry")).Count;
+            SelectEntry(entry.Id);
+            InitEntryModification(entry.Id);
+            FillInEntryForm(newEntryData);
+            SubmitEntryModification();
+            ReturnToHomePage();
+
+            return this;
         }
 
         public EntryHelper ModifyByIcon(int v, EntryData newEntryData)
@@ -198,6 +169,14 @@ namespace WebAddressbookTests
             SelectAll();
             RemoveEntryFromList();
             entryCache = null;
+
+            return this;
+        }
+
+        public EntryHelper RemoveFromList(EntryData entry)
+        {
+            SelectEntry(entry.Id);
+            RemoveEntryFromList();
 
             return this;
         }
@@ -261,6 +240,21 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public EntryHelper InitEntryModification(string id)
+        {
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in elements)
+            {
+                string s = element.FindElement(By.Name("selected[]")).GetAttribute("Value");
+                if (s == id)
+                {
+                    element.FindElement(By.XPath("(.//img[@title='Edit'])")).Click();
+                }
+            }
+
+            return this;
+        }
+
         public EntryHelper SubmitEntryModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -289,6 +283,12 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             entryCache = null;
 
+            return this;
+        }
+
+        public EntryHelper SelectEntry(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value = '" + id + "'])")).Click();
             return this;
         }
 
@@ -415,6 +415,20 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.TagName("label")).Text;
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
+        }
+
+        public void CheckEntryExists()
+        {
+            if (EntryExists() != true)
+            {
+                EntryData entryToAdd = new EntryData("first", "last");
+                manager.Entries.Create(entryToAdd);
+            }
+        }
+
+        public bool EntryExists()
+        {
+            return IsElementPresent(By.Name("selected[]"));
         }
     }
 }
